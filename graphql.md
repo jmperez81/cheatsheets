@@ -145,6 +145,45 @@ Mutations are just fields that do something when queried.
 
 Great for searching.
 
+### Fragments
+
+#### Explicit
+```js
+{
+    leftHero: hero {
+        ...fieldsToCompare
+    }
+    rightHero: hero {
+        ...fieldsToCompare
+    }
+}
+
+fragment fieldsToCompare on Character {
+    name
+    appearsIn
+    friends {
+        name
+    }
+}
+```
+We can avoid code duplication using fragments. Variables can be also used inside fragments.
+
+#### Inline
+```js
+{
+    hero {
+        name
+        ...on Droid {
+            primaryFunction
+        }
+        ...on Human {
+            height
+        }
+    }
+}
+```
+
+Can be useful to select different fields depending on the returned type
 
 Over HTTP
 ---------
